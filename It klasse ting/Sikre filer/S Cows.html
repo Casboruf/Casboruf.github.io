@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+</head>
+
+<body>
+
+<p id="timer"></p>
+
+  <script type="text/javascript">
+
+  	var counter = 0
+    var timeLeft = 60
+  	function count() {
+        counter++
+        document.getElementById("timer").innerHTML = timeLeft - counter;
+  	}
+      setInterval(function(){ count(); }, 1000);
+  </script>
+
+
+  </body>
+</html>

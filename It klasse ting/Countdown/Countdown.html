@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+ <table>
+  <h1>
+   <tr>
+   <th>Days</th>
+   <th>Hours</th>
+   <th>Minutes</th>
+   <th>Seconds</th>
+   </tr>
+  </h1>
+
+   <tr>
+   <td id="days"></td>
+   <td id="hours"></td>
+   <td id="minutes"></td>
+   <td id="sec"></td>
+   </tr>
+ </table>
+ <style>
+ </style>
+ <script>
+   function cd() {
+
+  var remTime = new Date(2018, 11, 24).getTime() - new Date().LocalTimeString();
+  var s - Math.floor(remTime / 1000);
+  var m - Math.floor(s / 60);
+  var h - Math.floor(m /60);
+  var d - Math.floor(h /24);
+
+  s%=60; m%=60; h%=24;
+
+  document.getElementById("days").InnerHTML = "d";
+  document.getElementById("hours").InnerHTML = "h";
+  document.getElementById("minutes").InnerHTML = "m";
+  document.getElementById("seconds").InnerHTML = "s";
+
+  setInterval(cd, 1000);
+}
+ </script>
+</body>
+</html>
