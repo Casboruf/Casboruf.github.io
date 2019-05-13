@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="no" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyA8ug4mK7BMo0d0YqJ0hVExEcOCqn1I8YE",
+        authDomain: "it-klasse-ting.firebaseapp.com",
+        databaseURL: "https://it-klasse-ting.firebaseio.com",
+        projectId: "it-klasse-ting",
+        storageBucket: "it-klasse-ting.appspot.com",
+        messagingSenderId: "288889664743"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <link rel="stylesheet" href="../css/under.css">
+
+  </head>
+  <body>
+    <section class="Hvit">
+      <div class="topnav" id="TopNav">
+        <a href="../html/Hovedside.html" class="Home">Home Page</a>
+        <a href="../html/Sjlævehændle.html">Pokedex</a>
+        <a href="../html/Videoer.html">Videos and Theme Songs</a>
+        <a href="../html/Rapidash.html">The passion of Pokémon</a>
+        <a href="javascript:void(0);" class="icon" onclick="TopNav()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+
+      <div class="Hoveddel">
+        <main class="">
+        </main>
+      </div>
+
+    </section>
+  </body>
+  
+  <script>
+
+  const main = document.querySelector("main");
+
+
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var id = url.searchParams.get("id");
+
+  const db = firebase.database();
+  const pokemon = db.ref("Pokemon/pokemon/" + id);
+
+  /*Sjekk S Sjlævehændel*/
+  let farger = {
+    "Bug": "lightgreen",
+    "Dragon": "darkblue",
+    "Electric": "yellow",
+    "Fighting": "darkorange",
+    "Fire": " rgb(244, 102, 25)",
+    "Flying": "lightblue",
+    "Ghost": "	rgb(75,0,130)",
+    "Grass": "green",
+    "Ground": "rgb(193, 84, 42)",
+    "Ice": "rgb(8,146,208)",
+    "Normal": "lightgrey",
+    "Poison": "rgb(186,85,211)",
+    "Psychic": "pink",
+    "Rock": "rgb(128,70,27)",
+    "Water": "rgb(34, 95, 120)"
+  };
+  /**/
+
+  /*-||-*/
+  let knapepr = {
+    "Bug": "visBug()",
+    "Dragon": "visDragon()",
+    "Electric": "visElectric()",
+    "Fighting": "visFighting()",
+    "Fire": "visFire()",
+    "Flying": "visFlying()",
+    "Ghost": "visGhost()",
+    "Grass": "visGrass()",
+    "Ground": "visGround()",
+    "Ice": "visIce()",
+    "Normal": "visNormal()",
+    "Poison": "visPoison()",
+    "Psychic": "visPsychic",
+    "Rock": "visRock()",
+    "Water": "visWater"
+  }
+  /**/
+  function visPokemon(snapshot){
+    let data = snapshot.val();
+
+    main.innerHTML +=`
+    <div id="Node" class="Node">
+      <div class="Image">
+        <img src="${data.ImageURL}">
+        <h1>${data.Name}</h1>
+        <div class="Type">
+          <p class="Type1" style="background-color: ${farger[data.Type1]};">${data.Type1}</p>
+          <p class="Type2" style="background-color: ${farger[data.Type2]};">${data.Type2}</p>
+        </div>
+      </div>
+
+      <div class="Table">
+        <div class="Stats">
+          <table>
+            <tr>
+              <th class="stats" colspan="2">Stats<th>
+              </tr>
+
+              <tr>
+                <td>Total:</td>
+                <td>${data.Total}</td>
+              </tr>
+
+              <tr>
+                <td>Hp:</td>
+                <td>${data.Hp}</td>
+              </tr>
+
+              <tr>
+                <td>Attack:</td>
+                <td>${data.Attack}</td>
+              </tr>
+
+              <tr>
+                <td>Defence:</td>
+                <td>${data.Defence}</td>
+              </tr>
+
+              <tr>
+                <td>SpAttack:</td>
+                <td>${data.SpAttack}</td>
+              </tr>
+
+              <tr>
+                <td>SpDefence:</td>
+                <td>${data.SpDefence}</td>
+              </tr>
+
+              <tr>
+                <td>Speed:</td>
+                <td>${data.Speed}</td>
+              </tr>
+
+            </div>
+
+            <div class="GO">
+
+              <tr>
+                <th class="stats" colspan="2">Pokemon GO Stats</th>
+              </tr>
+
+              <tr>
+                <td>Max CP:</td>
+                <td>${data.MaxCP}</td>
+              </tr>
+
+              <tr>
+                <td>Max HP:</td>
+                <td>${data.MaxHP}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      `;
+    }
+
+    pokemon.on("value", visPokemon)
+  </script>
+
+
+  <script>
+    function TopNav() {
+      var x = document.getElementById("TopNav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang=no dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title></title>
+
+    <link rel="stylesheet" href="../css/master.css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyA8ug4mK7BMo0d0YqJ0hVExEcOCqn1I8YE",
+        authDomain: "it-klasse-ting.firebaseapp.com",
+        databaseURL: "https://it-klasse-ting.firebaseio.com",
+        projectId: "it-klasse-ting",
+        storageBucket: "it-klasse-ting.appspot.com",
+        messagingSenderId: "288889664743"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+
+  </head>
+  <body>
+
+    <section class="Hvit">
+      <!--Her er navigasjonsbaren på toppen-->
+      <div class="topnav" id="TopNav">
+          <a href="../html/Hovedside.html">Home Page</a>
+          <a href="../html/Sjlævehændle.html">Pokedex</a>
+          <a href="../html/Videoer.html">Videos and Theme Songs</a>
+          <a href="../html/Rapidash.html">The passion of Pokémon</a>
+          <a href="javascript:void(0);" class="icon" onclick="TopNav()">
+            <i class="fa fa-bars"></i>
+          </a>
+      </div>
+      <!---->
+      <!--Her er knappene på toppen, som kjører de forskjellige funksjonene, og sorterer-->
+
+
+      <section class="Hoveddel">
+        <!--Se linje 167 på master.css. Skrev mye kode her, men det funket ikke
+
+        <button href="javascript:void(0);" class="icon" onclick="">
+          <i class="fa fa-bars"></i>
+        </button>-->
+
+        <button onclick="visID();">ID</button>
+        <button onclick="visName();">Name</button>
+        <div class="droplist">
+          <button class="dropbutton">Type</button>
+          <div class="dropdown">
+            <button onclick="visBug();">Bug</button>
+            <button onclick="visDragon();">Dragon</button>
+            <button onclick="visElectric();">Electric</button>
+            <button onclick="visFighting();">Fighting</button>
+            <button onclick="visFire();">Fire</button>
+            <button onclick="visFlying();">Flying</button>
+            <button onclick="visGhost();">Ghost</button>
+            <button onclick="visGrass();">Grass</button>
+            <button onclick="visGround();">Ground</button>
+            <button onclick="visIce();">Ice</button>
+            <button onclick="visNormal();">Normal</button>
+            <button onclick="visPoison();">Poison</button>
+            <button onclick="visPsychic();">Psychic</button>
+            <button onclick="visRock();">Rock</button>
+            <button onclick="visWater();">Water</button>
+          </div>
+        </div>
+        <button onclick="visTotal();">Total</button>
+        <button onclick="visHp();">Hp</button>
+        <button onclick="visAttack();">Attack</button>
+        <button onclick="visDefence();">Defence</button>
+        <button onclick="visSpAttack();">Sp.Attack</button>
+        <button onclick="visSpDefence();">Sp.Defence</button>
+        <button onclick="visSpeed();">Speed</button>
+      <!---->
+      </section>
+    <main>
+    </main>
+    <section class="NavBot">
+        <a href="#TopNav">Back to Top</a>
+    </section>
+  </section>
+  <script>
+  const main = document.querySelector("main");
+  const db = firebase.database();
+  const pokemon = db.ref("Pokemon/pokemon");
+
+  /*Her definerer jeg fargene som boksene på "Type"ene skal ha*/
+  let farger = {
+    "Bug": "lightgreen",
+    "Dragon": "darkblue",
+    "Electric": "yellow",
+    "Fighting": "rgb(193, 84, 42)",
+    "Fire": " rgb(244, 102, 25)",
+    "Flying": "rgb(8,146,208)",
+    "Ghost": "	rgb(75,0,130)",
+    "Grass": "green",
+    "Ground": "rgb(222,184,135)",
+    "Ice": "lightblue",
+    "Normal": "lightgrey",
+    "Poison": "rgb(186,85,211)",
+    "Psychic": "pink",
+    "Rock": "rgb(128,70,27)",
+    "Water": "rgb(34, 95, 120)"
+  };
+  /**/
+
+  let knapepr = {
+    "Bug": "visBug()",
+    "Dragon": "visDragon()",
+    "Electric": "visElectric()",
+    "Fighting": "visFighting()",
+    "Fire": "visFire()",
+    "Flying": "visFlying()",
+    "Ghost": "visGhost()",
+    "Grass": "visGrass()",
+    "Ground": "visGround()",
+    "Ice": "visIce()",
+    "Normal": "visNormal()",
+    "Poison": "visPoison()",
+    "Psychic": "visPsychic()",
+    "Rock": "visRock()",
+    "Water": "visWater()"
+  }
+
+  /*Her er funksjonen som kjører når man starter pokedeksen vanlig*/
+  function visPokemon(snapshot){
+    let pokeSnap = snapshot.val();
+    let key = snapshot.key;
+    let short = key.trim()
+
+    main.innerHTML +=`
+    <div class="Node" style="text-decoration:none; color:black">
+    <a href="../html/Pokemon.html?id=${key}">
+    <div class="double">
+    <img src="${pokeSnap.Icon}"></img>
+    <p>${key}</p>
+    </div>
+    </a>
+    <p>${pokeSnap.Name}</p>
+    <div class="Type">
+    <p onclick="${knapepr[pokeSnap.Type1]}" class="Type1" style="background-color: ${farger[pokeSnap.Type1]};">${pokeSnap.Type1}</p>
+    <p onclick="${knapepr[pokeSnap.Type2]}" class="Type2" style="background-color: ${farger[pokeSnap.Type2]};">${pokeSnap.Type2}</p>
+    </div>
+    <p>${pokeSnap.Total}</p>
+    <p>${pokeSnap.Hp}</p>
+    <p>${pokeSnap.Attack}</p>
+    <p>${pokeSnap.Defence}</p>
+    <p>${pokeSnap.SpAttack}</p>
+    <p>${pokeSnap.SpDefence}</p>
+    <p>${pokeSnap.Speed}</p>
+    </div>
+    `
+  }
+  /**/
+
+
+
+  /*Her er funksjonen som sorterer pokemonene etter høyeste verdi*/
+  function visSpecialPokemon(snapshot){
+    let pokeSnap = snapshot.val();
+    let key = snapshot.key;
+    let short = key.trim()
+
+    main.innerHTML =`
+      <div class="Node" style="text-decoration:none; color:black">
+        <a href="../html/Pokemon.html?id=${key}">
+          <div class="double">
+            <img src="${pokeSnap.Icon}"></img>
+            <p>${key}</p>
+          </div>
+        </a>
+        <p>${pokeSnap.Name}</p>
+        <div class="Type">
+          <p onclick="${knapepr[pokeSnap.Type1]}" class="Type1" style="background-color: ${farger[pokeSnap.Type1]};">${pokeSnap.Type1}</p>
+          <p onclick="${knapepr[pokeSnap.Type2]}" class="Type2" style="background-color: ${farger[pokeSnap.Type2]};">${pokeSnap.Type2}</p>
+        </div>
+        <p>${pokeSnap.Total}</p>
+        <p>${pokeSnap.Hp}</p>
+        <p>${pokeSnap.Attack}</p>
+        <p>${pokeSnap.Defence}</p>
+        <p>${pokeSnap.SpAttack}</p>
+        <p>${pokeSnap.SpDefence}</p>
+        <p>${pokeSnap.Speed}</p>
+      </div>
+    ` + main.innerHTML;
+
+      //main.insertBefore(main, main.childNodes[0]);
+  }
+  /**/
+
+
+  /*Queryen som kjøres når nettsiden starter*/
+  function visAlle(){
+    main.innerHTML = ``
+    pokemon.on("child_added",visPokemon)
+  }
+  visAlle();
+  /**/
+
+
+
+  /*Query, som sorterer etter høyeste verdi, for å finne sterkeste pokemon*/
+  function visID(){
+    main.innerHTML = ``
+    pokemon.on("child_added", visSpecialPokemon)
+  }
+
+  function visName() {
+    main.innerHTML = ``
+    pokemon.orderByChild("Name").on("child_added", visPokemon)
+  }
+
+  function visTotal(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Total").on("child_added",visSpecialPokemon)
+  }
+
+  function visHp(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Hp").on("child_added", visSpecialPokemon)
+  }
+
+  function visAttack(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Attack").on("child_added",visSpecialPokemon)
+  }
+
+  function visDefence(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Defence").on("child_added",visSpecialPokemon)
+  }
+
+  function visSpAttack(){
+    main.innerHTML = ``
+    pokemon.orderByChild("SpAttack").on("child_added",visSpecialPokemon)
+  }
+
+  function visSpDefence(){
+    main.innerHTML = ``
+    pokemon.orderByChild("SpDefence").on("child_added",visSpecialPokemon)
+  }
+
+  function visSpeed(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Speed").on("child_added",visSpecialPokemon)
+  }
+  /**/
+
+
+
+  /*Query, som sorterer pokemonene i typer. Sterkeste først*/
+  function visBug(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Bug").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Bug").on("child_added", visSpecialPokemon)
+
+  }
+
+  function visDragon(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Dragon").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Dragon").on("child_added", visSpecialPokemon)
+  }
+
+  function visElectric(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Electric").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Electric").on("child_added", visSpecialPokemon)
+  }
+
+  function visFighting(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Fighting").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Fighting").on("child_added", visSpecialPokemon)
+  }
+
+  function visFire(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Fire").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Fire").on("child_added", visSpecialPokemon)
+  }
+
+  function visFlying(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Flying").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Flying").on("child_added", visSpecialPokemon)
+  }
+
+  function visGhost(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Ghost").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Ghost").on("child_added", visSpecialPokemon)
+  }
+
+  function visGrass(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Grass").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type1").equalTo("Grass").on("child_added", visSpecialPokemon)
+  }
+  function visGround(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Ground").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Ground").on("child_added", visSpecialPokemon)
+  }
+
+  function visIce(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Ice").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Ice").on("child_added", visSpecialPokemon)
+  }
+
+  function visNormal(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Normal").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Normal").on("child_added", visSpecialPokemon)
+  }
+
+  function visPoison(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Poison").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Poison").on("child_added", visSpecialPokemon)
+  }
+
+  function visPsychic(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Psychic").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Psychic").on("child_added", visSpecialPokemon)
+  }
+
+  function visRock(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Rock").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Rock").on("child_added", visSpecialPokemon)
+  }
+
+  function visWater(){
+    main.innerHTML = ``
+    pokemon.orderByChild("Type1").equalTo("Water").on("child_added", visSpecialPokemon)
+    pokemon.orderByChild("Type2").equalTo("Water").on("child_added", visSpecialPokemon)
+  }
+  /**/
+
+</script>
+  </body>
+</html>
+
+<script>
+    function TopNav() {
+      var x = document.getElementById("TopNav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+</script>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="no" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/hoved.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyA8ug4mK7BMo0d0YqJ0hVExEcOCqn1I8YE",
+        authDomain: "it-klasse-ting.firebaseapp.com",
+        databaseURL: "https://it-klasse-ting.firebaseio.com",
+        projectId: "it-klasse-ting",
+        storageBucket: "it-klasse-ting.appspot.com",
+        messagingSenderId: "288889664743"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+  </head>
+  <body onload="loadContent()">
+
+    <section class="Hvit">
+
+        <div class="topnav" id="TopNav">
+            <a href="../html/Hovedside.html" class="Home">Home Page</a>
+            <a href="../html/Sjlævehændle.html">Pokedex</a>
+            <a href="../html/Videoer.html">Videos and Theme Songs</a>
+            <a href="../html/Rapidash.html">The passion of Pokémon</a>
+            <a href="javascript:void(0);" class="icon" onclick="TopNav()">
+              <i class="fa fa-bars"></i>
+            </a>
+        </div>
+
+        <section id="Hoveddel" class="Hoveddel">
+        </section>
+        <section class="NavBot">
+            <a href="#TopNav">Back to Top</a>
+        </section>
+    </section>
+  </body>
+</html>
+
+<script>
+  function loadContent() {
+    var isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+    if (isMobile) {
+
+      document.getElementById("Hoveddel").innerHTML = `
+          <a href="../html/Sjlævehændle.html" class="Rapi">
+            <img id="image" src="../Bilder/Pokedex.PNG" width="100px"></img>
+            <h1>Pokedex</h1>
+          </a>
+          <br>
+          <a href="../html/Videoer.html" class="Rapi">
+            <img id="image" src="../Bilder/Movie.PNG" alt="hei"></img>
+            <h1>Theme songs and Movies</h1>
+          </a>
+          <br>
+          <a href="../html/Rapidash.html" class="Rapi">
+            <img id="image" src="../Bilder/Rapidash.jpg"></img>
+            <h1>Passion of Pokémon</h1>
+          </a>
+      `;
+
+    } else {
+
+      document.getElementById("Hoveddel").innerHTML = `
+          <a href="../html/Sjlævehændle.html">
+            <img src="../Bilder/Pokedex.PNG"></img>
+            <h1>Pokedex</h1>
+          </a>
+          <a href="../html/Videoer.html">
+            <img src="../Bilder/Movie.PNG" alt="hei"></img>
+            <h1>Theme songs and Movies</h1>
+          </a>
+          <a href="../html/Rapidash.html" class="Rapi">
+            <img src="../Bilder/Rapidash.jpg"></img>
+            <h1>Passion of Pokémon</h1>
+          </a>
+      `;
+
+    };
+ };
+</script>
+
+<script>
+    function TopNav() {
+      var x = document.getElementById("TopNav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+</script>

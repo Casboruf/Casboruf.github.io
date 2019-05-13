@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <link rel="stylesheet" href="../css/videoer.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <body onload="loadContent()">
+
+    <section class="Hvit">
+
+      <div class="topnav" id="TopNav">
+            <a href="../html/Hovedside.html" class="Home">Home Page</a>
+            <a href="../html/Sjlævehændle.html">Pokedex</a>
+            <a href="../html/Videoer.html">Videos and Theme Songs</a>
+            <a href="../html/Rapidash.html">The passion of Pokémon</a>
+            <a href="javascript:void(0);" class="icon" onclick="TopNav()">
+              <i class="fa fa-bars"></i>
+            </a>
+      </div>
+
+      <section class="Hoveddel">
+        <h1>Movies</h1>
+        <div id="Pokemon" class="Pokemon">
+          <a class="grid-item" href="../Filmer/Mewtwo.mp4"><img src="../Bilder/Mewtwo.jpg"><h1>Mewtwo Strikes Back</h1></a>
+          <a class="grid-item" href="../Filmer/Lugia.mp4"><img src="../Bilder/Lugia.jpg"><h1>The Power of One</h1></a>
+          <a class="grid-item" href="../Filmer/Entei.mp4"><img src="../Bilder/Entei.jpg"><h1>Spell of the Unown</h1></a>
+          <a class="grid-item" href="../Filmer/Celebi.mp4"><img src="../Bilder/Celebi.jpg"><h1>Celebi - Voice of the Forest</h1></a>
+          <a class="grid-item" href="../Filmer/Latios.mp4"><img src="../Bilder/Latios.png"><h1>Latios and Latias</h1></a>
+          <a class="grid-item" href="../Filmer/Jirachi.mp4"><img src="../Bilder/Jirachi.jpg"> <h1>Wish Maker</h1> </a>
+          <a class="grid-item" href="../Filmer/Manaphy.mp4"><img src="../Bilder/Manaphy.jpg"> <h1>Pokemon Ranger and the Temple of the sea</h1> </a>
+          <a class="grid-item" href="../Filmer/Deoxys.mp4"><img src="../Bilder/Deoxys.jpg"> <h1>Destiny Deoxys</h1> </a>
+          <a class="grid-item" href="../Filmer/Lucario.mp4"><img src="../Bilder/Lucario.jpg"> <h1>Lucario and the Mystery of Mew</h1> </a>
+          <a class="grid-item" href="../Filmer/Palkia.mp4"><img src="../Bilder/Palkia.jpg"> <h1>The Rise of Darkrai</h1> </a>
+          <a class="grid-item" href="../Filmer/Giratina.mp4"><img src="../Bilder/Giratina.jpg"> <h1>Giratina and the Sky Warrior</h1> </a>
+          <a class="grid-item" href="../Filmer/Arceus.mp4"><img src="../Bilder/Arceus.jpg"> <h1>Arceus and the Jewel of Life</h1> </a>
+        </div>
+
+        <!--<h1>Theme Songs</h1>      Funket ikke er jeg redd ://
+        <div class="Theme">
+          <audio class="grid-item" href="../Musikk/Gen1.mp3" controls type="mpeg"></audio>
+          <audio class="grid-item" href="../Musikk/Gen2.mp3" controls type="mpeg"></audio>
+          <audio class="grid-item" href="../Musikk/Gen3.mp3" controls type="mpeg"></audio>
+          <audio class="grid-item" href="../Musikk/Gen4.mp3" controls type="mpeg"></audio>
+          <audio class="grid-item" href="../Musikk/Gen5.mp3" controls type="mpeg"></audio>
+        </div>-->
+
+        <!--<h1>Bonus Features</h1>      Var bare stygg
+        <div class="Bonus">
+            <a class="grid-item" href="../Filmer/Mewtwo Returns.mp4"><img src="../Bilder/Returns.jpg"></a>
+        </div>-->
+
+      </section>
+      <section class="NavBot">
+          <a href="#TopNav">Back to Top</a>
+      </section>
+    </section>
+
+  </body>
+</html>
+
+<script>
+    function TopNav() {
+      var x = document.getElementById("TopNav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+</script>
+
+<script>
+function loadContent() {
+    var isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+    if (isMobile) {
+      document.getElementById("Pokemon").style.gridTemplateColumns = "auto";
+      document.getElementById("Theme").style.gridTemplateColumns = "auto";
+      document.getElementById("Bonus").style.gridTemplateColumns = "auto";
+    };
+};
+</script>
